@@ -1,6 +1,6 @@
 package trabengIII.Entity;
 
 
-public class Produto {
+public class TipoProduto {
     
 }
