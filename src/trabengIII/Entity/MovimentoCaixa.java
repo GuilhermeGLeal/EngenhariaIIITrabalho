@@ -1,5 +1,5 @@
 package trabengIII.Entity;
 
-public class ItensVenda {
+public class MovimentoCaixa {
     
 }
