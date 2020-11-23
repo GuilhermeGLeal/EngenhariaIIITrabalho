@@ -1,6 +1,9 @@
 package trabengIII.Entity;
 
-public class Cliente {
+import trabengIII.Interface.Observador;
+
+public class Cliente implements Observador{
+    
     private int cli_id;
     private String cli_nome;
     private String cli_cpf;
@@ -66,5 +69,11 @@ public class Cliente {
 
     public void setCli_fone(String cli_fone) {
         this.cli_fone = cli_fone;
+    }
+
+    @Override
+    public String atualizar(TipoProduto tip, double desconto) {
+       
+        return "Leite do tipo "+tip.getTip_descricao()+"está com desconto de "+desconto+"% !!";
     }
 }

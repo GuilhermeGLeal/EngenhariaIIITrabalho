@@ -1,6 +1,8 @@
 package trabengIII.Entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Venda {
     private int ven_id;
@@ -8,7 +10,8 @@ public abstract class Venda {
     private double ven_total;
     private LocalDate ven_data;
     private char ven_tipo;
-
+    private List<ItensVenda> itens;
+    
     public Venda() {
     }
 
@@ -17,7 +20,17 @@ public abstract class Venda {
         this.ven_cli = ven_cli;
         this.ven_total = ven_total;
         this.ven_data = ven_data;
+        itens = new ArrayList();
         this.ven_tipo = ven_tipo;
+    }
+
+    
+    public List<ItensVenda> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItensVenda> itens) {
+        this.itens = itens;
     }
 
     public int getVen_id() {

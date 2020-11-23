@@ -7,7 +7,7 @@ public class Dinheiro implements ReceberPagar{
     
     private int id;
     private Venda venda;
-    private String tipo;
+    private char tipo;
     private LocalDate emisao;
     private LocalDate pagamento;
     private double recebimento;
@@ -17,7 +17,7 @@ public class Dinheiro implements ReceberPagar{
     public Dinheiro() {
     }
 
-    public Dinheiro(int id, Venda venda, String tipo, LocalDate emisao, LocalDate pagamento, double recebimento, char tipo_pagamento, double desconto) {
+    public Dinheiro(int id, Venda venda, char tipo, LocalDate emisao, LocalDate pagamento, double recebimento, char tipo_pagamento, double desconto) {
         this.id = id;
         this.venda = venda;
         this.tipo = tipo;
@@ -44,11 +44,11 @@ public class Dinheiro implements ReceberPagar{
         this.venda = venda;
     }
 
-    public String getTipo() {
+    public char getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(char tipo) {
         this.tipo = tipo;
     }
 

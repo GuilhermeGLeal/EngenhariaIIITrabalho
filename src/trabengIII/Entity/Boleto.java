@@ -1,11 +1,12 @@
 package trabengIII.Entity;
 
 import java.time.LocalDate;
+import trabengIII.Interface.ReceberPagar;
 
-public class Boleto {
+public class Boleto implements ReceberPagar{
     private int id;
     private Venda venda;
-    private String tipo;
+    private char tipo;
     private LocalDate emisao;
     private LocalDate pagamento;
     private double recebimento;
@@ -15,7 +16,7 @@ public class Boleto {
     public Boleto() {
     }
 
-    public Boleto(int id, Venda venda, String tipo, LocalDate emisao, LocalDate pagamento, double recebimento, char tipo_pagamento, double juros) {
+    public Boleto(int id, Venda venda, char tipo, LocalDate emisao, LocalDate pagamento, double recebimento, char tipo_pagamento, double juros) {
         this.id = id;
         this.venda = venda;
         this.tipo = tipo;
@@ -42,11 +43,11 @@ public class Boleto {
         this.venda = venda;
     }
 
-    public String getTipo() {
+    public char getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(char tipo) {
         this.tipo = tipo;
     }
 
@@ -88,5 +89,10 @@ public class Boleto {
 
     public void setJuros(double juros) {
         this.juros = juros;
+    }
+
+    @Override
+    public void efetuarOperacao() {
+        
     }
 }
