@@ -59,4 +59,8 @@ public class Caixa {
     public void setVfinal(double vfinal) {
         this.vfinal = vfinal;
     }
+    
+    public boolean isAberto () {
+        return fechamento == null;
+    }
 }

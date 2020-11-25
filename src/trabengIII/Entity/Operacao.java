@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Venda {
+public abstract class Operacao {
     private int ven_id;
     private Cliente ven_cli;
     private double ven_total;
@@ -12,10 +12,10 @@ public abstract class Venda {
     private char ven_tipo;
     private List<ItensVenda> itens;
     
-    public Venda() {
+    public Operacao() {
     }
 
-    public Venda(int ven_id, Cliente ven_cli, double ven_total, LocalDate ven_data, char ven_tipo) {
+    public Operacao(int ven_id, Cliente ven_cli, double ven_total, LocalDate ven_data, char ven_tipo) {
         this.ven_id = ven_id;
         this.ven_cli = ven_cli;
         this.ven_total = ven_total;

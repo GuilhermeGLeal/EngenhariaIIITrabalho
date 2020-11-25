@@ -2,7 +2,7 @@ package trabengIII.Entity;
 
 import java.time.LocalDate;
 
-public class Varejo extends Venda{
+public class Varejo extends Operacao{
 
     public Varejo() {
     }
