@@ -6,11 +6,12 @@ public class Dinheiro implements ReceberPagar{
     
     @Override
     public void efetuarOperacao() {
-//        if(compra) {
+        
+//        if(tipo == 'C') {
 //            
 //        }
 //        else {
-//            venda
+//          
 //        }
     }
 }
