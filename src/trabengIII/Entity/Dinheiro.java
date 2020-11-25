@@ -94,11 +94,12 @@ public class Dinheiro implements ReceberPagar{
 
     @Override
     public void efetuarOperacao() {
-//        if(compra) {
-//            
-//        }
-//        else {
-//            venda
-//        }
+        
+        if(tipo == 'C') {
+            
+        }
+        else {
+          
+        }
     }
 }
