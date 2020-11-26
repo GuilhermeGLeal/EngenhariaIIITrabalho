@@ -1,18 +1,19 @@
 package trabengIII.Entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Caixa {
     private int id;
-    private Date abertura;
-    private Date fechamento;
+    private LocalDate abertura;
+    private LocalDate fechamento;
     private double inicial;
     private double vfinal;
 
     public Caixa() {
     }
 
-    public Caixa(int id, Date abertura, Date fechamento, double inicial, double vfinal) {
+    public Caixa(int id, LocalDate abertura, LocalDate fechamento, double inicial, double vfinal) {
         this.id = id;
         this.abertura = abertura;
         this.fechamento = fechamento;
@@ -28,19 +29,19 @@ public class Caixa {
         this.id = id;
     }
 
-    public Date getAbertura() {
+    public LocalDate getAbertura() {
         return abertura;
     }
 
-    public void setAbertura(Date abertura) {
+    public void setAbertura(LocalDate abertura) {
         this.abertura = abertura;
     }
 
-    public Date getFechamento() {
+    public LocalDate getFechamento() {
         return fechamento;
     }
 
-    public void setFechamento(Date fechamento) {
+    public void setFechamento(LocalDate fechamento) {
         this.fechamento = fechamento;
     }
 

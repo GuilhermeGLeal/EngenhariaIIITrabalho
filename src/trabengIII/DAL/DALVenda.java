@@ -27,7 +27,7 @@ public class DALVenda {
         res = con.manipular(sql);
         
         
-        res = gravarItens(o.getItens());
+        res = gravarItens(o.getItens(),'I',o.getVen_id());
         con.desconectar();
         
         return res;        
@@ -49,7 +49,7 @@ public class DALVenda {
         return res;        
     }
     
-    public boolean gravarItens(List<ItensVenda> itens) {
+    public boolean gravarItens(List<ItensVenda> itens, char op, int id) {
 
         boolean ok = true;
 
@@ -59,7 +59,10 @@ public class DALVenda {
             
             con.getConnect().setAutoCommit(false);
            
-
+            if(op == 'A')
+            {
+                ok = con.manipular("delete * from itens where ite_ven="+id);
+            }            
             if (ok) {
 
                 for (int i = 0; i < itens.size() && ok; i++) {
@@ -96,6 +99,8 @@ public class DALVenda {
         
         Conexao con = Conexao.getConexao();
         res = con.manipular(sql);
+        res = gravarItens(o.getItens(),'A',o.getVen_id());
+        
         con.desconectar();
         return res;
     }
@@ -104,7 +109,8 @@ public class DALVenda {
     {
         boolean res = false;
         Conexao con = Conexao.getConexao();
-        res = con.manipular("delete from venda where cli_id="+o.getVen_id());
+        res = con.manipular("delete * from venda where cli_id="+o.getVen_id());
+        res = con.manipular("delete * from itens where ite_ven="+o.getVen_id());
         con.desconectar();
         return res;
     }
@@ -152,10 +158,10 @@ public class DALVenda {
         con.desconectar();
         try 
         {
-            //DALProduto dal = new DALProduto();
+            DALProduto dal = new DALProduto();
             while(rs.next())
             {
-                //aux.add(new ItensVenda(dal.get(rs.getInt("ite_pro")), rs.getInt("ite_quantidade")));
+                aux.add(new ItensVenda(dal.get(rs.getInt("ite_pro")), rs.getInt("ite_quantidade")));
             }
         } 
         catch (SQLException ex) 
