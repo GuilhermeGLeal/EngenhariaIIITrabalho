@@ -2,11 +2,14 @@ package trabengIII.DAL;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import trabengIII.Banco.Conexao;
+import trabengIII.Entity.Atacado;
 import trabengIII.Entity.ItensVenda;
 import trabengIII.Entity.Operacao;
+import trabengIII.Entity.Varejo;
 
 public class DALVenda {
     public boolean gravar(Operacao o)
@@ -22,10 +25,10 @@ public class DALVenda {
         
         Conexao con = Conexao.getConexao();
         res = con.manipular(sql);
+        
+        
+        res = gravarItens(o.getItens());
         con.desconectar();
-        
-        gravarItens(o.getItens());
-        
         
         return res;        
     }
@@ -41,7 +44,7 @@ public class DALVenda {
         
         Conexao con = Conexao.getConexao();
         res = con.manipular(sql);
-        con.desconectar();     
+            
         
         return res;        
     }
@@ -49,34 +52,32 @@ public class DALVenda {
     public boolean gravarItens(List<ItensVenda> itens) {
 
         boolean ok = true;
-//
-//        try {
-//            
-//            Conexao con = Conexao.getConexao();
-//            //con.setAutoCommit(false);     
-//             
-//
-//            if(!get("").isEmpty())
-//                 ok = con.manipular("delete from itens");
-//
-//            if (ok) {
-//
-//                for (int i = 0; i < itens.size() && ok; i++) {
-//
-//                    ok = inserir(itens.get(i));
-//                }
-//            }
-//
-//            if (ok) {
-//                //con.commit();
-//            } else {
-//                //con.rollback();
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//            ok = false;
-//        }
-//
+
+        try {
+            
+            Conexao con = Conexao.getConexao();
+            
+            con.getConnect().setAutoCommit(false);
+           
+
+            if (ok) {
+
+                for (int i = 0; i < itens.size() && ok; i++) {
+
+                    ok = inserir(itens.get(i));
+                }
+            }
+
+            if (ok) {
+                con.getConnect().commit();
+            } else {
+                con.getConnect().rollback();
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            ok = false;
+        }
+
         return ok;
     }
     
@@ -120,8 +121,17 @@ public class DALVenda {
             DALCliente dal = new DALCliente();
             if(rs.next())
             {
-                //aux = new Operacao(rs.getInt("ven_id"),dal.get(rs.getInt("ven_cli")),rs.getDouble("ven_valor"),
-                //                rs.getDate("ven_data"), rs.getString("ven_tipo"));
+                if(rs.getString("ven_tipo").charAt(0) == 'A')
+                {
+                    aux = new Atacado(rs.getInt("ven_id"),dal.get(rs.getInt("ven_cli")),rs.getDouble("ven_valor"),
+                                rs.getDate("ven_data").toLocalDate(), rs.getString("ven_tipo").charAt(0));
+                }
+                else
+                {
+                    aux = new Varejo(rs.getInt("ven_id"),dal.get(rs.getInt("ven_cli")),rs.getDouble("ven_valor"),
+                                rs.getDate("ven_data").toLocalDate(), rs.getString("ven_tipo").charAt(0));
+                }
+                
             }
         } 
         catch (SQLException ex) 

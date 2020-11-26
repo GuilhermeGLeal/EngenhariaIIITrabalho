@@ -34,6 +34,10 @@ public class Conexao {
         return erro;
     }
 
+    public Connection getConnect() {
+        return connect;
+    }
+
     public boolean getEstadoConexao() {
         if (connect == null) {
             return false;
