@@ -71,16 +71,16 @@ public class DALProduto {
         con.desconectar();
         try 
         {
-//            DALTipo dalT = new DALTipo();
-//            DALRecipiente dalR = new DALRecipiente();
-//            DALMedida dalMe = new DALMedida();
-//            DALMarca dalMa = new DALMarca();
+            DALTipo dalT = new DALTipo();
+            DALRecepiente dalR = new DALRecepiente();
+            DALMedida dalMe = new DALMedida();
+            DALMarca dalMa = new DALMarca();
             
             if(rs.next())
             {
-//                aux = new Produto(rs.getInt("pro_id"),rs.getString("pro_nome"), rs.getDouble("pro_preco"), rs.getInt("pro_quantidade"),
-//                         dalT.get(rs.getInt("pro_tipo")), dalMa.get(rs.getInt("pro_marca")), dalR.get(rs.getInt("pro_recipiente")), 
-//                            dalMe.get(rs.getInt("pro_medida")));
+                aux = new Produto(rs.getInt("pro_id"),rs.getString("pro_nome"), rs.getDouble("pro_preco"), rs.getInt("pro_quantidade"),
+                         dalT.get(rs.getInt("pro_tipo")), dalMa.get(rs.getInt("pro_marca")), dalR.get(rs.getInt("pro_recipiente")), 
+                            dalMe.get(rs.getInt("pro_medida")));
                 
             }
         } 
@@ -102,16 +102,16 @@ public class DALProduto {
         con.desconectar();;
         try 
         {
-//            DALTipo dalT = new DALTipo();
-//            DALRecipiente dalR = new DALRecipiente();
-//            DALMedida dalMe = new DALMedida();
-//            DALMarca dalMa = new DALMarca();
+            DALTipo dalT = new DALTipo();
+            DALRecepiente dalR = new DALRecepiente();
+            DALMedida dalMe = new DALMedida();
+            DALMarca dalMa = new DALMarca();
             
             while(rs.next())
             {
-//                aux.add(new Produto(rs.getInt("pro_id"),rs.getString("pro_nome"), rs.getDouble("pro_preco"), rs.getInt("pro_quantidade"),
-//                         dalT.get(rs.getInt("pro_tipo")), dalMa.get(rs.getInt("pro_marca")), dalR.get(rs.getInt("pro_recipiente")), 
-//                            dalMe.get(rs.getInt("pro_medida")));
+                aux.add(new Produto(rs.getInt("pro_id"),rs.getString("pro_nome"), rs.getDouble("pro_preco"), rs.getInt("pro_quantidade"),
+                         dalT.get(rs.getInt("pro_tipo")), dalMa.get(rs.getInt("pro_marca")), dalR.get(rs.getInt("pro_recipiente")), 
+                            dalMe.get(rs.getInt("pro_medida"))));
             }
         } 
         catch (SQLException ex) 

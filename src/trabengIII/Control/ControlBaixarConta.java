@@ -2,17 +2,18 @@ package trabengIII.Control;
 
 import trabengIII.Entity.Caixa;
 import trabengIII.Entity.MovimentoCaixa;
+import trabengIII.Entity.PagamentoRecebimento;
 import trabengIII.Interface.ReceberPagar;
 
 public abstract class ControlBaixarConta {
     private Caixa caixa;
     private MovimentoCaixa movcaixa;
-    private ReceberPagar receberpagar;
+    private PagamentoRecebimento receberpagar;
 
     public ControlBaixarConta() {
     }
 
-    public ControlBaixarConta(Caixa caixa, MovimentoCaixa movcaixa, ReceberPagar receberpagar) {
+    public ControlBaixarConta(Caixa caixa, MovimentoCaixa movcaixa, PagamentoRecebimento receberpagar) {
         this.caixa = caixa;
         this.movcaixa = movcaixa;
         this.receberpagar = receberpagar;

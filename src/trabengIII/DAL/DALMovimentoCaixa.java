@@ -1,5 +1,7 @@
 package trabengIII.DAL;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import trabengIII.Banco.Conexao;
 import trabengIII.Entity.MovimentoCaixa;
 
@@ -24,20 +26,21 @@ public class DALMovimentoCaixa {
         return res;
     }
 
-//   public MovimentoCaixa get(int cod) {
-//
-//        MovimentoCaixa aux = null;
-//        ReceberPagar rp;
-//        Caixa cx;
-//
-//        Conexao con = Conexao.getConexao();
-//        ResultSet rs = con.consultar("select * from movimento where mov_con='"+cod+"'");
-//        try{
-//            if(rs.next())
-//                aux = new MovimentoCaixa(rs.getInt("mov_con"),rs.getString("mov_cai"));
-//        }
-//        catch(SQLException sqlEx){}
-//
-//        return aux;
-//   }
+   public MovimentoCaixa get(int cod) {
+
+        MovimentoCaixa aux = null;
+        
+        Conexao con = Conexao.getConexao();
+        ResultSet rs = con.consultar("select * from movimento where mov_con='"+cod+"'");
+        try{
+            DALReceberPagar dalRP = new DALReceberPagar();
+            DALCaixa dalC = new DALCaixa();
+            
+            if(rs.next())
+                aux = new MovimentoCaixa(dalRP.get(rs.getInt("mov_con")), dalC.get(rs.getInt("mov_cai")));
+        }
+        catch(SQLException sqlEx){}
+
+        return aux;
+   }
 }
