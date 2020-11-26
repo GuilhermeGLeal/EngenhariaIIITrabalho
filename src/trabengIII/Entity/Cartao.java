@@ -3,8 +3,10 @@ package trabengIII.Entity;
 import trabengIII.Interface.ReceberPagar;
 
 public class Cartao implements ReceberPagar{
+    
     @Override
-    public void efetuarOperacao() {
+    public double efetuarOperacao(double valoratual) {
         
+        return valoratual + (valoratual * 0.015);
     }
 }

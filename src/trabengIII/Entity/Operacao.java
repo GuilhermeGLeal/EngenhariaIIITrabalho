@@ -72,4 +72,6 @@ public abstract class Operacao {
     public void setVen_tipo(char ven_tipo) {
         this.ven_tipo = ven_tipo;
     }
+    
+     public abstract void aplicarDesconto();
 }

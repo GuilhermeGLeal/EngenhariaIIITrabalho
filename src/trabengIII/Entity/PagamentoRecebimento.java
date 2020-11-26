@@ -79,5 +79,24 @@ public class PagamentoRecebimento {
 
     public void setTipo_pagamento(char tipo_pagamento) {
         this.tipo_pagamento = tipo_pagamento;
+    }    
+    
+    public void calculadesconto(){
+        
+        switch(tipo_pagamento){
+            
+            case 'B':
+                  Boleto bol = new Boleto();
+                  this.setRecebimento(bol.efetuarOperacao(this.getRecebimento()));
+                break;
+            case 'C':
+                Cartao cart = new Cartao();
+                  this.setRecebimento(cart.efetuarOperacao(this.getRecebimento()));
+                break;
+            case 'D':
+                Dinheiro din = new Dinheiro();
+                  this.setRecebimento(din.efetuarOperacao(this.getRecebimento()));
+                break;
+        }
     }
 }

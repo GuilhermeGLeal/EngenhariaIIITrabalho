@@ -1,29 +1,61 @@
 package trabengIII.Control;
 
+import java.time.LocalDate;
+import trabengIII.DAL.DALMovimentoCaixa;
+import trabengIII.DAL.DALReceberPagar;
 import trabengIII.Entity.Caixa;
 import trabengIII.Entity.MovimentoCaixa;
+import trabengIII.Entity.Operacao;
 import trabengIII.Entity.PagamentoRecebimento;
-import trabengIII.Interface.ReceberPagar;
 
 public abstract class ControlBaixarConta {
+  
     private Caixa caixa;
     private MovimentoCaixa movcaixa;
     private PagamentoRecebimento receberpagar;
 
-    public ControlBaixarConta() {
+    public Caixa getCaixa() {
+        return caixa;
     }
 
-    public ControlBaixarConta(Caixa caixa, MovimentoCaixa movcaixa, PagamentoRecebimento receberpagar) {
+    public void setCaixa(Caixa caixa) {
         this.caixa = caixa;
+    }
+
+    public MovimentoCaixa getMovcaixa() {
+        return movcaixa;
+    }
+
+    public void setMovcaixa(MovimentoCaixa movcaixa) {
         this.movcaixa = movcaixa;
+    }
+
+    public PagamentoRecebimento getReceberpagar() {
+        return receberpagar;
+    }
+
+    public void setReceberpagar(PagamentoRecebimento receberpagar) {
         this.receberpagar = receberpagar;
     }
 
-    public final void gravar() {
+    public ControlBaixarConta() {
+    }
+
+    public ControlBaixarConta(Caixa caixa, MovimentoCaixa movcaixa) {
+        this.caixa = caixa;
+        this.movcaixa = movcaixa;
+        this.receberpagar = null;
+    }
+
+    public final void gravar(Operacao op, char tipo, LocalDate emissoa, LocalDate dataPag, double valorPag, char tipopag) {
         if(caixa.isAberto()) {
-            if(this.atualizarConta()) {
+            if(this.atualizarConta(op,  tipo,  emissoa,  dataPag,  valorPag,  tipopag)) {
+                
                 this.criarMovimento();
                 this.atualizarCaixa();
+            }
+            else{
+                // alert sem saldo
             }
         }
         else {
@@ -32,18 +64,34 @@ public abstract class ControlBaixarConta {
     }
     
     protected void criarMovimento() {
+        
         movcaixa = new MovimentoCaixa(receberpagar, caixa);
-        
-        // salvar no banco chamando dal
+        DALMovimentoCaixa dal = new DALMovimentoCaixa();
+        dal.gravar(movcaixa);
+      
     }
     
-    protected boolean atualizarConta() {
+    protected boolean atualizarConta(Operacao op, char tipo, LocalDate emissoa, LocalDate dataPag, double valorPag, char tipopag) {
         
-        // verificar se é uma conta e tem saldo, criar conta e salvar no banco
-        return false;
+        boolean result = false;
+        
+        if(tipopag == 'P' && caixa.getVfinal() >= op.getVen_total()){
+            receberpagar = new PagamentoRecebimento(0, op, tipo, emissoa, dataPag, valorPag, tipopag);
+            
+        }
+        else if(tipopag == 'R')           
+            receberpagar = new PagamentoRecebimento(0, op, tipo, emissoa, dataPag, valorPag, tipopag);
+        else
+            return false;
+             
+        DALReceberPagar dal = new DALReceberPagar();
+        result = dal.gravar(receberpagar);
+        
+        return result;
+        
     }
     
-    protected void atualizarCaixa() {
-        // atualiza e salva no banco
-    }
+    protected abstract void atualizarCaixa();
+    
+    
 }

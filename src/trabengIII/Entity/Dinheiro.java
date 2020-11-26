@@ -5,13 +5,8 @@ import trabengIII.Interface.ReceberPagar;
 public class Dinheiro implements ReceberPagar{
     
     @Override
-    public void efetuarOperacao() {
-        
-//        if(tipo == 'C') {
-//            
-//        }
-//        else {
-//          
-//        }
+    public double efetuarOperacao(double valoratual) {
+ 
+        return valoratual - (valoratual * 0.05);
     }
 }

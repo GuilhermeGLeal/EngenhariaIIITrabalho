@@ -1,7 +1,6 @@
 package trabengIII.Interface;
 
 public interface ReceberPagar {
-   
-   
-   public void efetuarOperacao();
+      
+   public double efetuarOperacao(double valoratual);
 }
