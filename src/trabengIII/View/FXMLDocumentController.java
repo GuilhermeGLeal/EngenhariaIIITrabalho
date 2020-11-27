@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 public class FXMLDocumentController implements Initializable 
 {    
@@ -49,10 +50,12 @@ public class FXMLDocumentController implements Initializable
 
     @FXML
     private void clkMinimiar(ActionEvent event) {
+        ((Stage)(btMinizar.getParent().getScene().getWindow())).setIconified(true);
     }
 
     @FXML
     private void clkFechar(ActionEvent event) {
+        System.exit(0);
     }
 
     @FXML
