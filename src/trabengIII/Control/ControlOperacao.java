@@ -17,6 +17,7 @@ public class ControlOperacao {
         
     }
     
+    
     public boolean gravar(Cliente cli, double venda, LocalDate vendata, char tipo, List<ItensVenda> itens){
         
         boolean resultado = false;

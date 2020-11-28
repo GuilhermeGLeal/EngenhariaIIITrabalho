@@ -13,6 +13,7 @@ public class Atacado extends Operacao{
        
     }
 
+    @Override
     public void aplicarDesconto(){
         
         this.setVen_total(this.getVen_total() - (this.getVen_total() * 0.10));
