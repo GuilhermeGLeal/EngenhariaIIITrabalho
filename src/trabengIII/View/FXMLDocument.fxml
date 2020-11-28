@@ -56,6 +56,11 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></JFXComboBox>
+                  <JFXComboBox fx:id="cbCliente" focusColor="#aa2746" onAction="#clkCliente" prefHeight="25.0" prefWidth="67.0" promptText="Cliente" style="-fx-prompt-text-fill: #AA2746;">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXComboBox>
                   <JFXButton fx:id="btFavoritar" onAction="#clkFavoritar" prefHeight="35.0" prefWidth="65.0" style="-fx-background-color: #AA2746; -fx-text-fill: #F8D417; -fx-background-radius: 20px;" text="Favoritar">
                      <cursor>
                         <Cursor fx:constant="HAND" />
