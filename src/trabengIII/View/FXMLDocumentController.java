@@ -20,6 +20,10 @@ public class FXMLDocumentController implements Initializable
     @FXML
     private Button btFechar;
     @FXML
+    private JFXButton btFavoritar;
+    @FXML
+    private TableView<?> tvItensCompra;
+    @FXML
     private JFXComboBox<?> cbMarca;
     @FXML
     private JFXComboBox<?> cbTipo;
@@ -28,15 +32,13 @@ public class FXMLDocumentController implements Initializable
     @FXML
     private JFXComboBox<?> cbRecipiente;
     @FXML
-    private JFXButton btFavoritar;
+    private JFXComboBox<?> cbCliente;
     @FXML
     private JFXButton btInserir;
     @FXML
     private JFXButton btRemover;
     @FXML
     private TableView<?> tvLeite;
-    @FXML
-    private TableView<?> tvItensCompra;
     @FXML
     private JFXComboBox<?> cbTipoPagamento;
     @FXML
@@ -58,6 +60,11 @@ public class FXMLDocumentController implements Initializable
         System.exit(0);
     }
 
+
+    @FXML
+    private void clkFavoritar(ActionEvent event) {
+    }
+
     @FXML
     private void clkMarca(ActionEvent event) {
     }
@@ -75,7 +82,7 @@ public class FXMLDocumentController implements Initializable
     }
 
     @FXML
-    private void clkFavoritar(ActionEvent event) {
+    private void clkCliente(ActionEvent event) {
     }
 
     @FXML
@@ -93,5 +100,6 @@ public class FXMLDocumentController implements Initializable
     @FXML
     private void clkComprar(ActionEvent event) {
     }
+
     
 }
