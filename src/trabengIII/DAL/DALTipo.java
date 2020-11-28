@@ -7,6 +7,7 @@ import java.util.List;
 import trabengIII.Banco.Conexao;
 import trabengIII.Entity.Cliente;
 import trabengIII.Entity.TipoProduto;
+import trabengIII.Interface.Observador;
 
 public class DALTipo {
     
@@ -103,18 +104,47 @@ public class DALTipo {
         
     }
     
+    public List<Observador> retornaTodos(int idTipo){
+        
+        
+        List<Observador> todos = new ArrayList();
+        Conexao con = Conexao.getConexao();
+        ResultSet rs = con.consultar("select * from favorito where tip_id="+idTipo);
+        DALCliente dalc = new DALCliente();
+        Cliente cli;
+        
+         try 
+        {
+            while(rs.next())
+            {
+                cli = dalc.get(rs.getInt("cli_id"));
+                todos.add(cli);
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            
+        }
+         
+        return todos;
+        
+    }
+    
     public TipoProduto get(int id){
      
         TipoProduto aux = null;
         Conexao con = Conexao.getConexao();
         ResultSet rs = con.consultar("select * from tipo where tip_id="+id);
-        con.desconectar();
+       
+        List<Observador> todos = new ArrayList();
         
         try 
         {
             if(rs.next())
             {
-                   aux = new TipoProduto(rs.getInt("tip_id"), rs.getString("tip_descricao"));
+                   aux = new TipoProduto(rs.getInt("tip_id"), rs.getString("tip_descricao"));        
+                   todos = retornaTodos(aux.getTip_id());
+                   aux.setLo(todos);
             }
         } 
         catch (SQLException ex) 
@@ -122,6 +152,7 @@ public class DALTipo {
             
         }
         
+         con.desconectar();
         return aux;
     }
     
@@ -135,20 +166,28 @@ public class DALTipo {
         List <TipoProduto> tipos = new ArrayList();
         Conexao con = Conexao.getConexao();
         ResultSet rs = con.consultar(sql);
-        con.desconectar();
+        List<Observador> todos = new ArrayList();
+        TipoProduto tipo;
         
         try 
         {
             while(rs.next())
             {
-                tipos.add(new TipoProduto(rs.getInt("tip_id"), rs.getString("tip_descricao")));
+                tipo = new TipoProduto(rs.getInt("tip_id"), rs.getString("tip_descricao"));
+                todos = retornaTodos(tipo.getTip_id());
+                tipo.setLo(todos);
+                
+                tipos.add(tipo);
+                
             }
         } 
         catch (SQLException ex) 
         {
             
+            
         }
         
+        con.desconectar();
         return tipos;
     }
 }

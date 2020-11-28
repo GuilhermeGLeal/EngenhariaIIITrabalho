@@ -3,6 +3,7 @@ package trabengIII.Control;
 import java.time.LocalDate;
 import trabengIII.DAL.DALMovimentoCaixa;
 import trabengIII.DAL.DALReceberPagar;
+import trabengIII.DAL.DALCaixa;
 import trabengIII.Entity.Caixa;
 import trabengIII.Entity.MovimentoCaixa;
 import trabengIII.Entity.Operacao;
@@ -38,12 +39,10 @@ public abstract class ControlBaixarConta {
         this.receberpagar = receberpagar;
     }
 
-    public ControlBaixarConta() {
-    }
-
-    public ControlBaixarConta(Caixa caixa, MovimentoCaixa movcaixa) {
-        this.caixa = caixa;
-        this.movcaixa = movcaixa;
+     public ControlBaixarConta() {
+        
+        this.caixa = null;
+        this.movcaixa = null;
         this.receberpagar = null;
     }
 
@@ -93,5 +92,34 @@ public abstract class ControlBaixarConta {
     
     protected abstract void atualizarCaixa();
     
+    protected void abrirCaixa(double inicial, LocalDate abertura){
+        
+        if(this.caixa == null){
+            
+             this.caixa = new  Caixa(0, abertura, null, inicial, inicial);
+             DALCaixa dal = new DALCaixa();
+             dal.gravar(this.caixa);
+         }
+        else{
+         
+            //mensamge
+        }           
+            
+    }
+     
+     protected void fecharCaixa(){
+        
+        if(this.caixa != null){
+            
+            this.caixa.setFechamento(LocalDate.now());
+             DALCaixa dal = new DALCaixa();
+             dal.alterar(this.caixa);
+         }
+        else{
+         
+            //mensamge
+        }           
+            
+    }
     
 }

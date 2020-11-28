@@ -7,6 +7,7 @@ import trabengIII.Entity.Atacado;
 import trabengIII.Entity.Cliente;
 import trabengIII.Entity.ItensVenda;
 import trabengIII.Entity.Operacao;
+import trabengIII.Entity.Produto;
 import trabengIII.Entity.Varejo;
 
 public class ControlOperacao {
@@ -17,20 +18,28 @@ public class ControlOperacao {
         
     }
     
+    public List<ItensVenda> retornarItensVenda(){
+        
+        return op.getItens();
+    }
     
-    public boolean gravar(Cliente cli, double venda, LocalDate vendata, char tipo, List<ItensVenda> itens){
+    public void adicionarItemVenda(int qtd, Produto prod){
+        
+        ItensVenda novo = new ItensVenda(prod, qtd, this.op);
+        this.op.setItens(novo);
+    }
+        
+    public boolean gravar(Cliente cli, double venda, LocalDate vendata, char tipo){
         
         boolean resultado = false;
         
         if(tipo == 'A'){
             
             op = new Atacado(0, cli, venda, vendata, tipo);
-            op.setItens(itens);
-            op.aplicarDesconto();
+           op.aplicarDesconto();
         }
         else{
-            op = new Varejo(0, cli, venda, vendata, tipo);
-            op.setItens(itens);
+            op = new Varejo(0, cli, venda, vendata, tipo); 
            
         }
         

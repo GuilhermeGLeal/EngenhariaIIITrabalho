@@ -32,6 +32,10 @@ public abstract class Operacao {
     public void setItens(List<ItensVenda> itens) {
         this.itens = itens;
     }
+    
+     public void setItens(ItensVenda item) {
+       this.itens.add(item);
+    }
 
     public int getVen_id() {
         return ven_id;

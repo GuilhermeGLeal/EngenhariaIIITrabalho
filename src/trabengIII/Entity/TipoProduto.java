@@ -22,6 +22,7 @@ public class TipoProduto implements Sujeito {
         this.desconto = 0;
     }
 
+    
     public int getTip_id() {
         return tip_id;
     }

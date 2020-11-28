@@ -8,7 +8,7 @@ public class ItensVenda {
     private Operacao vend;
     private static ItensVenda iten = null;
        
-    private ItensVenda(Produto prod, int qtd, Operacao vend){
+    public ItensVenda(Produto prod, int qtd, Operacao vend){
         
         this.prod = prod;
         this.qtd = qtd;
