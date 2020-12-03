@@ -3,7 +3,7 @@ package trabengIII.View;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import java.awt.Color;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,12 +11,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import trabengIII.Control.ControlCliente;
 import trabengIII.Control.ControlTipoProduto;
@@ -70,7 +73,7 @@ public class FXMLTelaFavoritoController implements Initializable {
         
         CarregaFavoritos(null);
         
-        // = Color.Red;
+        
     }    
 
     public void carregarComboBox(){
@@ -95,7 +98,13 @@ public class FXMLTelaFavoritoController implements Initializable {
 
     @FXML
     private void clkFechar(ActionEvent event) {
-          System.exit(0);
+           try {
+            Parent root;
+            root = FXMLLoader.load(getClass().getResource("FXMLTelaFavorito.fxml"));
+            FXMLDocumentController.bpprin.setCenter(root);
+        
+        }
+        catch(IOException exc) {System.out.println(exc);}
     }
 
     @FXML
@@ -123,7 +132,8 @@ public class FXMLTelaFavoritoController implements Initializable {
             a.showAndWait();
         }
         else{
-            CarregaFavoritos(event);    
+            CarregaFavoritos(event); 
+            cbtpProduto.setItems(controlTipo.retornarTipos());
         }
         
     }
@@ -134,6 +144,7 @@ public class FXMLTelaFavoritoController implements Initializable {
         Favorito fav = tvItensCompra.getSelectionModel().getSelectedItem();
         controlTipo.removerFavorito(fav.getTip(), fav.getCli());
         CarregaFavoritos(event);
+          cbtpProduto.setItems(controlTipo.retornarTipos());
     }
 
     @FXML

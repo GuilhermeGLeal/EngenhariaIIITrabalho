@@ -63,8 +63,8 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <JFXComboBox fx:id="cbCliente" focusColor="#aa2746" layoutX="578.0" layoutY="19.0" prefHeight="25.0" prefWidth="187.0" promptText="Cliente" style="-fx-prompt-text-fill: #F8D417;" unFocusColor="#f8d417" />
-                              <JFXComboBox fx:id="cbTipoProd" focusColor="#aa2746" layoutX="297.0" layoutY="19.0" onAction="#CarregaFavoritos" prefHeight="25.0" prefWidth="187.0" promptText="Tipo Produto" style="-fx-prompt-text-fill: #F8D417;" unFocusColor="#f8d417" />
+                              <JFXComboBox fx:id="cbCliente" blendMode="MULTIPLY" focusColor="#aa2746" layoutX="578.0" layoutY="19.0" prefHeight="25.0" prefWidth="187.0" promptText="Cliente" style="-fx-prompt-text-fill: #F8D417;" unFocusColor="#f8d417" />
+                              <JFXComboBox fx:id="cbTipoProd" blendMode="MULTIPLY" focusColor="#aa2746" layoutX="297.0" layoutY="19.0" onAction="#CarregaFavoritos" prefHeight="25.0" prefWidth="187.0" promptText="Tipo Produto" style="-fx-prompt-text-fill: #F8D417;" unFocusColor="#f8d417" />
                               <JFXButton fx:id="btFavoritar" buttonType="RAISED" layoutX="31.0" layoutY="14.0" onAction="#clkFavoritar" prefHeight="35.0" prefWidth="65.0" style="-fx-background-color: #AA2746; -fx-text-fill: #F8D417; -fx-background-radius: 20px;" text="Favoritar">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -72,7 +72,7 @@
                               </JFXButton>
                               <HBox alignment="CENTER" layoutX="255.0" layoutY="81.0" prefHeight="236.0" prefWidth="509.0" style="-fx-background-color: #90CD62; -fx-background-radius: 25px;">
                                  <children>
-                                    <TableView fx:id="tvItensCompra" prefHeight="216.0" prefWidth="495.0" style="-fx-background-color: white;">
+                                    <TableView fx:id="tvItensCompra" blendMode="MULTIPLY" prefHeight="216.0" prefWidth="495.0" style="-fx-background-color: white;">
                                        <columns>
                                           <TableColumn fx:id="colCli" maxWidth="2000.0" prefWidth="75.0" text="Cliente" />
                                           <TableColumn fx:id="colTipo" maxWidth="2000.0" prefWidth="75.0" text="Tipo Produto" />
