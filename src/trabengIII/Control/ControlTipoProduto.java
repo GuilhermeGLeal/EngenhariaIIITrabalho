@@ -24,62 +24,87 @@ public class ControlTipoProduto {
     }
     
     
-    public void adicionarFavorito(int indexTipo, Cliente cli){
+    public boolean verificaFavoritoExistente(TipoProduto tip, Cliente cli){
+     
+        boolean res = true;
         
-        this.tipoTodos.get(indexTipo).adicionar(cli);
-        gravarFavorito(indexTipo);
+        for (int i = 0; i < tip.getLo().size() && res; i++) {
+              
+            Cliente cli2 = (Cliente) tip.getLo().get(i);
+            
+            if(cli2.getCli_id() == cli.getCli_id())
+                res = false;
+            
+        }
+        
+        return res;
+    }
+    
+    public boolean adicionarFavorito(TipoProduto tipo, Cliente cli){
+        
+        boolean res = verificaFavoritoExistente(tipo, cli);
+        
+        if(res){
+            
+             tipo.adicionar(cli);
+             gravarFavorito(tipo);
+        }
+       
+        return res;
     }
     
      public void removerFavorito(TipoProduto tip, Cliente cli){
         
         tip.remover(cli);
-        gravarFavorito(tipoTodos.indexOf(tip));
+        gravarFavorito(tip);
     }
     
-    public String notificaTodos(int index){
+    public String notificaTodos(TipoProduto tip, double desconto){
         
         int cont;
-        TipoProduto tip = tipoTodos.get(index);
+        tip.setDesconto(desconto);
         cont = tip.notificar();
+        String mensagem = "";
         
         if(cont == 0){
             
-            // mensagem sem cliente favorito
+            mensagem = "Nenhum cliente favoritou o tipo: "+tip.getTip_descricao();
         }
         else{
             
-            // mensagem com qtd de clientes avisados
+            mensagem = cont+" clientes foram notificados do desconto de "+desconto+"%";
         }
         
-        return "";
+        return mensagem;
     }
     
-    public List<Favorito> retornarList(int index){
+    public List<Favorito> retornarList(TipoProduto tip){
         
         List<Favorito> favs = new ArrayList();
-        List<Observador> todos = this.tipoTodos.get(index).getLo();
+        List<Observador> todos = tip.getLo();
           
         for (int i = 0; i < todos.size(); i++) {
             
-            favs.add(new Favorito(tipoTodos.get(index), (Cliente) todos.get(index)));
+            Cliente cli = (Cliente) todos.get(i);
+            favs.add(new Favorito(tip, cli));
         }
         
         return favs;
         
     }
     
-    public ObservableList<Favorito> retornarListFav(int indexTipo){
+    public ObservableList<Favorito> retornarListFav(TipoProduto tip){
         
-        ObservableList<Favorito> modeloFavs =  FXCollections.observableArrayList(retornarList(indexTipo));
+      
+        List<Favorito> favs = retornarList(tip);
+        ObservableList<Favorito> modeloFavs =  FXCollections.observableArrayList(favs);
         return modeloFavs;
     }
     
-    public boolean gravarFavorito(int index){
+    public boolean gravarFavorito(TipoProduto tip){
         
         boolean res = false;
         DALTipo dal = new DALTipo();
-        TipoProduto tip =  tipoTodos.get(index);
-        
         res = dal.atualizar(tip);
         
         return res;

@@ -76,4 +76,11 @@ public class Cliente implements Observador{
        
         return "Leite do tipo "+tip.getTip_descricao()+"está com desconto de "+desconto+"% !!";
     }
+
+    @Override
+    public String toString() {
+        return this.cli_nome;
+    }
+    
+    
 }
