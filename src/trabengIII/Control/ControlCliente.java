@@ -2,6 +2,8 @@ package trabengIII.Control;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import trabengIII.DAL.DALCliente;
 import trabengIII.Entity.Cliente;
 
@@ -24,6 +26,15 @@ public class ControlCliente {
         this.clienteTodos = dal.get("");
     }
 
+    public ObservableList<Cliente> retornarLista(){
+        
+       listarCliente();
+       ObservableList<Cliente> modeloCli =  FXCollections.observableArrayList(clienteTodos);
+     
+        return modeloCli;
+        
+    }
+    
     public Cliente getCliente() {
         return cliente;
     }

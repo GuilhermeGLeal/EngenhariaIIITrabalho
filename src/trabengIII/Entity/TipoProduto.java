@@ -76,10 +76,13 @@ public class TipoProduto implements Sujeito {
     }
 
     @Override
-    public void notificar() {
+    public int notificar() {
       
+        
         for (int i = 0; i < lo.size(); i++) {
             lo.get(i).atualizar(this, this.desconto);
         }
+        
+        return lo.size();
     }
 }

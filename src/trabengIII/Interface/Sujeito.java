@@ -5,5 +5,5 @@ public interface Sujeito {
     
     public void adicionar(Observador ob);
     public void remover(Observador ob);
-    public void notificar();
+    public int notificar();
 }

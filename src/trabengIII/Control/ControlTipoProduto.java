@@ -2,8 +2,11 @@ package trabengIII.Control;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import trabengIII.DAL.DALTipo;
 import trabengIII.Entity.Cliente;
+import trabengIII.Entity.Favorito;
 import trabengIII.Entity.TipoProduto;
 import trabengIII.Interface.Observador;
 
@@ -12,6 +15,7 @@ public class ControlTipoProduto {
     
     private TipoProduto tipo;
     private List<TipoProduto> tipoTodos;
+    
 
     public ControlTipoProduto() {
         
@@ -26,17 +30,48 @@ public class ControlTipoProduto {
         gravarFavorito(indexTipo);
     }
     
-     public void removerFavorito(int indexTipo, Cliente cli){
+     public void removerFavorito(TipoProduto tip, Cliente cli){
         
-        this.tipoTodos.get(indexTipo).remover(cli);
-        gravarFavorito(indexTipo);
+        tip.remover(cli);
+        gravarFavorito(tipoTodos.indexOf(tip));
     }
-     
-    public List<Observador> retornaFavoritoTipo(int indexTipo){
+    
+    public String notificaTodos(int index){
         
-        List<Observador> todos = this.tipoTodos.get(indexTipo).getLo();
+        int cont;
+        TipoProduto tip = tipoTodos.get(index);
+        cont = tip.notificar();
         
-        return todos;
+        if(cont == 0){
+            
+            // mensagem sem cliente favorito
+        }
+        else{
+            
+            // mensagem com qtd de clientes avisados
+        }
+        
+        return "";
+    }
+    
+    public List<Favorito> retornarList(int index){
+        
+        List<Favorito> favs = new ArrayList();
+        List<Observador> todos = this.tipoTodos.get(index).getLo();
+          
+        for (int i = 0; i < todos.size(); i++) {
+            
+            favs.add(new Favorito(tipoTodos.get(index), (Cliente) todos.get(index)));
+        }
+        
+        return favs;
+        
+    }
+    
+    public ObservableList<Favorito> retornarListFav(int indexTipo){
+        
+        ObservableList<Favorito> modeloFavs =  FXCollections.observableArrayList(retornarList(indexTipo));
+        return modeloFavs;
     }
     
     public boolean gravarFavorito(int index){
@@ -56,6 +91,14 @@ public class ControlTipoProduto {
         this.tipoTodos = dal.get("");
     }
 
+    public ObservableList<TipoProduto> retornarTipos(){
+        
+       listarTipos();
+       ObservableList<TipoProduto> modeloTipos =  FXCollections.observableArrayList(tipoTodos);
+     
+        return modeloTipos;
+    }
+        
     public TipoProduto getTipo() {
         return tipo;
     }
