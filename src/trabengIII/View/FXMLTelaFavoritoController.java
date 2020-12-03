@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabengIII.View;
 
 import com.jfoenix.controls.JFXButton;
@@ -20,17 +15,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 import trabengIII.Control.ControlCliente;
 import trabengIII.Control.ControlTipoProduto;
 import trabengIII.Entity.Cliente;
 import trabengIII.Entity.Favorito;
 import trabengIII.Entity.TipoProduto;
 
-/**
- * FXML Controller class
- *
- * @author Guilherme Azevedo
- */
+
 public class FXMLTelaFavoritoController implements Initializable {
 
     @FXML
@@ -87,10 +79,12 @@ public class FXMLTelaFavoritoController implements Initializable {
             
     @FXML
     private void clkMinimiar(ActionEvent event) {
+         ((Stage)(btMinizar.getParent().getScene().getWindow())).setIconified(true);
     }
 
     @FXML
     private void clkFechar(ActionEvent event) {
+          System.exit(0);
     }
 
     @FXML
