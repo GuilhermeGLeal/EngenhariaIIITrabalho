@@ -101,7 +101,7 @@ public class FXMLTelaFavoritoController implements Initializable {
            try {
             Parent root;
             root = FXMLLoader.load(getClass().getResource("FXMLTelaFavorito.fxml"));
-            FXMLDocumentController.bpprin.setCenter(root);
+            //FXMLDocumentController.bpprin.setCenter(root);
         
         }
         catch(IOException exc) {System.out.println(exc);}

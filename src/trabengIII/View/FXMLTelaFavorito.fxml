@@ -12,110 +12,116 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="782.0" style="-fx-background-color: #404354;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trabengIII.View.FXMLTelaFavoritoController">
-   <children>
-      <VBox prefHeight="101.0" prefWidth="721.0" spacing="10.0">
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="trabengIII.View.FXMLTelaFavoritoController">
+   <center>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="782.0" style="-fx-background-color: #404354;" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER_RIGHT" prefHeight="47.0" prefWidth="782.0" spacing="5.0" style="-fx-background-color: #AA2746;">
+            <VBox prefHeight="101.0" prefWidth="721.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-image: url('imagens/minicone.png'); -fx-background-position: center center; -fx-background-repeat: no-repeat; -fx-background-color: transparent;">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Button>
-                  <Label text="AtivOperante" textFill="#f8d417">
-                     <HBox.margin>
-                        <Insets right="590.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Button fx:id="btMinizar" mnemonicParsing="false" onAction="#clkMinimiar" prefHeight="32.0" prefWidth="32.0" style="-fx-background-image: url('imagens/minimize.png'); -fx-background-position: center center; -fx-background-repeat: no-repeat; -fx-background-color: transparent;">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="btFechar" mnemonicParsing="false" onAction="#clkFechar" prefHeight="32.0" prefWidth="32.0" style="-fx-background-image: url('imagens/close.png'); -fx-background-position: center center; -fx-background-repeat: no-repeat; -fx-background-color: transparent;">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="47.0" prefWidth="782.0" spacing="5.0" style="-fx-background-color: #AA2746;">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-image: url('imagens/minicone.png'); -fx-background-position: center center; -fx-background-repeat: no-repeat; -fx-background-color: transparent;">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                        <Label text="AtivOperante" textFill="#f8d417">
+                           <HBox.margin>
+                              <Insets right="590.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Button fx:id="btMinizar" mnemonicParsing="false" onAction="#clkMinimiar" prefHeight="32.0" prefWidth="32.0" style="-fx-background-image: url('imagens/minimize.png'); -fx-background-position: center center; -fx-background-repeat: no-repeat; -fx-background-color: transparent;">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="btFechar" mnemonicParsing="false" onAction="#clkFechar" prefHeight="32.0" prefWidth="32.0" style="-fx-background-image: url('imagens/close.png'); -fx-background-position: center center; -fx-background-repeat: no-repeat; -fx-background-color: transparent;">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="62.0" prefWidth="721.0" spacing="10.0" style="-fx-background-color: #F8D417;">
+                     <children>
+                        <Label prefHeight="49.0" prefWidth="186.0" style="-fx-text-fill: #AA2746;" text="FAVORITOS">
+                           <font>
+                              <Font name="System Bold" size="33.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="62.0" prefWidth="721.0" spacing="10.0" style="-fx-background-color: #F8D417;">
+            </VBox>
+            <VBox prefHeight="485.0" prefWidth="782.0" spacing="10.0">
                <children>
-                  <Label prefHeight="49.0" prefWidth="186.0" style="-fx-text-fill: #AA2746;" text="FAVORITOS">
-                     <font>
-                        <Font name="System Bold" size="33.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-      <VBox prefHeight="485.0" prefWidth="782.0" spacing="10.0">
-         <children>
-            <TabPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="488.0" prefWidth="782.0" rotateGraphic="true" side="BOTTOM" tabClosingPolicy="UNAVAILABLE">
-              <tabs>
-                <Tab style="-fx-background-color: #AA2746;" text="Favoritar">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <JFXComboBox fx:id="cbCliente" blendMode="MULTIPLY" focusColor="#aa2746" layoutX="578.0" layoutY="19.0" prefHeight="25.0" prefWidth="187.0" promptText="Cliente" style="-fx-prompt-text-fill: #F8D417;" unFocusColor="#f8d417" />
-                              <JFXComboBox fx:id="cbTipoProd" blendMode="MULTIPLY" focusColor="#aa2746" layoutX="297.0" layoutY="19.0" onAction="#CarregaFavoritos" prefHeight="25.0" prefWidth="187.0" promptText="Tipo Produto" style="-fx-prompt-text-fill: #F8D417;" unFocusColor="#f8d417" />
-                              <JFXButton fx:id="btFavoritar" buttonType="RAISED" layoutX="31.0" layoutY="14.0" onAction="#clkFavoritar" prefHeight="35.0" prefWidth="65.0" style="-fx-background-color: #AA2746; -fx-text-fill: #F8D417; -fx-background-radius: 20px;" text="Favoritar">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </JFXButton>
-                              <HBox alignment="CENTER" layoutX="255.0" layoutY="81.0" prefHeight="236.0" prefWidth="509.0" style="-fx-background-color: #90CD62; -fx-background-radius: 25px;">
+                  <TabPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="488.0" prefWidth="782.0" rotateGraphic="true" side="BOTTOM" tabClosingPolicy="UNAVAILABLE">
+                     <tabs>
+                        <Tab style="-fx-background-color: #AA2746;" text="Favoritar">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TableView fx:id="tvItensCompra" blendMode="MULTIPLY" prefHeight="216.0" prefWidth="495.0" style="-fx-background-color: white;">
-                                       <columns>
-                                          <TableColumn fx:id="colCli" maxWidth="2000.0" prefWidth="75.0" text="Cliente" />
-                                          <TableColumn fx:id="colTipo" maxWidth="2000.0" prefWidth="75.0" text="Tipo Produto" />
-                                       </columns>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
+                                    <JFXComboBox fx:id="cbCliente" focusColor="#aa2746" layoutX="578.0" layoutY="19.0" prefHeight="25.0" prefWidth="187.0" promptText="Cliente" style="-fx-prompt-text-fill: #F8D417;" unFocusColor="#f8d417" />
+                                    <JFXComboBox fx:id="cbTipoProd" focusColor="#aa2746" layoutX="297.0" layoutY="19.0" onAction="#CarregaFavoritos" prefHeight="25.0" prefWidth="187.0" promptText="Tipo Produto" style="-fx-prompt-text-fill: #F8D417;" unFocusColor="#f8d417" />
+                                    <JFXButton fx:id="btFavoritar" buttonType="RAISED" layoutX="31.0" layoutY="14.0" onAction="#clkFavoritar" prefHeight="35.0" prefWidth="65.0" style="-fx-background-color: #AA2746; -fx-text-fill: #F8D417; -fx-background-radius: 20px;" text="Favoritar">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
-                                    </TableView>
+                                    </JFXButton>
+                                    <HBox alignment="CENTER" layoutX="255.0" layoutY="81.0" prefHeight="236.0" prefWidth="509.0" style="-fx-background-color: #90CD62; -fx-background-radius: 25px;">
+                                       <children>
+                                          <TableView fx:id="tvItensCompra" blendMode="MULTIPLY" prefHeight="216.0" prefWidth="495.0" style="-fx-background-color: transparent;">
+                                             <columns>
+                                                <TableColumn fx:id="colCli" maxWidth="2000.0" prefWidth="75.0" text="Cliente" />
+                                                <TableColumn fx:id="colTipo" maxWidth="2000.0" prefWidth="75.0" text="Tipo Produto" />
+                                             </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </TableView>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" top="10.0" />
+                                       </padding>
+                                    </HBox>
+                                    <JFXButton fx:id="btRemover" buttonType="RAISED" layoutX="170.0" layoutY="271.0" onAction="#clkRemover" prefHeight="35.0" prefWidth="65.0" style="-fx-background-color: #AA2746; -fx-text-fill: #F8D417; -fx-background-radius: 20px;" text="Remover">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </JFXButton>
                                  </children>
-                                 <padding>
-                                    <Insets bottom="10.0" top="10.0" />
-                                 </padding>
-                              </HBox>
-                              <JFXButton fx:id="btRemover" buttonType="RAISED" layoutX="170.0" layoutY="271.0" onAction="#clkRemover" prefHeight="35.0" prefWidth="65.0" style="-fx-background-color: #AA2746; -fx-text-fill: #F8D417; -fx-background-radius: 20px;" text="Remover">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </JFXButton>
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
-                <Tab style="-fx-background-color: #AA2746;" text="Dar desconto">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <JFXComboBox fx:id="cbtpProduto" focusColor="#aa2746" labelFloat="true" layoutX="558.0" layoutY="135.0" prefHeight="25.0" prefWidth="187.0" promptText="Tipo Produto" style="-fx-prompt-text-fill: #F8D417;" unFocusColor="#f8d417" />
-                              <JFXTextField fx:id="txtDesconto" focusColor="#aa2746" labelFloat="true" layoutX="382.0" layoutY="135.0" promptText="Desconto" style="-fx-prompt-text-fill: #F8D417;" unFocusColor="#f8d417" />
-                              <JFXButton fx:id="btDesconto" buttonType="RAISED" layoutX="19.0" layoutY="130.0" onAction="#clkDarDesconto" prefHeight="35.0" prefWidth="87.0" style="-fx-background-color: #AA2746; -fx-text-fill: #F8D417; -fx-background-radius: 20px;" text="Desconto">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </JFXButton>
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
-              </tabs>
-            </TabPane>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab style="-fx-background-color: #AA2746;" text="Dar desconto">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXComboBox fx:id="cbtpProduto" focusColor="#aa2746" labelFloat="true" layoutX="558.0" layoutY="135.0" prefHeight="25.0" prefWidth="187.0" promptText="Tipo Produto" style="-fx-prompt-text-fill: #F8D417;" unFocusColor="#f8d417" />
+                                    <JFXTextField fx:id="txtDesconto" focusColor="#aa2746" labelFloat="true" layoutX="382.0" layoutY="135.0" promptText="Desconto" style="-fx-prompt-text-fill: #F8D417;" unFocusColor="#f8d417" />
+                                    <JFXButton fx:id="btDesconto" buttonType="RAISED" layoutX="19.0" layoutY="130.0" onAction="#clkDarDesconto" prefHeight="35.0" prefWidth="87.0" style="-fx-background-color: #AA2746; -fx-text-fill: #F8D417; -fx-background-radius: 20px;" text="Desconto">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </JFXButton>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </TabPane>
+               </children>
+            </VBox>
          </children>
       </VBox>
-   </children>
-</VBox>
+   </center>
+</BorderPane>

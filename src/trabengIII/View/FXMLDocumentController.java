@@ -4,7 +4,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,10 +15,19 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import trabengIII.DAL.DALCliente;
+import trabengIII.DAL.DALMarca;
+import trabengIII.DAL.DALMedida;
+import trabengIII.DAL.DALRecepiente;
+import trabengIII.DAL.DALTipo;
+import trabengIII.Entity.Cliente;
+import trabengIII.Entity.MarcaProduto;
+import trabengIII.Entity.RecipienteProduto;
+import trabengIII.Entity.TipoProduto;
+import trabengIII.Entity.UnidadeMedida;
 
 public class FXMLDocumentController implements Initializable 
 {    
@@ -30,15 +41,15 @@ public class FXMLDocumentController implements Initializable
     @FXML
     private TableView<?> tvItensCompra;
     @FXML
-    private JFXComboBox<?> cbMarca;
+    private JFXComboBox<MarcaProduto> cbMarca;
     @FXML
-    private JFXComboBox<?> cbTipo;
+    private JFXComboBox<TipoProduto> cbTipo;
     @FXML
-    private JFXComboBox<?> cbMedida;
+    private JFXComboBox<UnidadeMedida> cbMedida;
     @FXML
-    private JFXComboBox<?> cbRecipiente;
+    private JFXComboBox<RecipienteProduto> cbRecipiente;
     @FXML
-    private JFXComboBox<?> cbCliente;
+    private JFXComboBox<Cliente> cbCliente;
     @FXML
     private JFXButton btInserir;
     @FXML
@@ -46,7 +57,7 @@ public class FXMLDocumentController implements Initializable
     @FXML
     private TableView<?> tvLeite;
     @FXML
-    private JFXComboBox<?> cbTipoPagamento;
+    private JFXComboBox<String> cbTipoPagamento;
     @FXML
     private JFXButton btLimpar;
     @FXML
@@ -55,12 +66,24 @@ public class FXMLDocumentController implements Initializable
     @FXML
     private BorderPane bpPrincipal;
     
-    
-    public static BorderPane bpprin;
+    private void inicializarCBs() {
+        
+        ArrayList<String> tp = new ArrayList<>();
+        tp.add("Crédito");
+        tp.add("Débito");
+        tp.add("Boleto");
+        cbTipoPagamento.setItems(FXCollections.observableArrayList(tp));
+        
+        cbMarca.setItems(FXCollections.observableArrayList(new DALMarca().get("")));
+        cbTipo.setItems(FXCollections.observableArrayList(new DALTipo().get("")));
+        cbMedida.setItems(FXCollections.observableArrayList(new DALMedida().get("")));
+        cbRecipiente.setItems(FXCollections.observableArrayList(new DALRecepiente().get("")));
+        cbCliente.setItems(FXCollections.observableArrayList(new DALCliente().get("")));
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        bpprin = bpPrincipal;
+        inicializarCBs();
     }    
 
     @FXML
@@ -72,7 +95,6 @@ public class FXMLDocumentController implements Initializable
     private void clkFechar(ActionEvent event) {
         System.exit(0);
     }
-
 
     @FXML
     private void clkFavoritar(ActionEvent event) {
@@ -86,6 +108,7 @@ public class FXMLDocumentController implements Initializable
 
     @FXML
     private void clkMarca(ActionEvent event) {
+        
     }
 
     @FXML
