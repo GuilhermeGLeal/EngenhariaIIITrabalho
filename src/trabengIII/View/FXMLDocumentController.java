@@ -2,14 +2,20 @@ package trabengIII.View;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class FXMLDocumentController implements Initializable 
@@ -45,9 +51,16 @@ public class FXMLDocumentController implements Initializable
     private JFXButton btLimpar;
     @FXML
     private JFXButton btComprar;
+    private VBox vbPrincipal;
+    @FXML
+    private BorderPane bpPrincipal;
+    
+    
+    public static BorderPane bpprin;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        bpprin = bpPrincipal;
     }    
 
     @FXML
@@ -63,6 +76,12 @@ public class FXMLDocumentController implements Initializable
 
     @FXML
     private void clkFavoritar(ActionEvent event) {
+        try {
+            Parent root;
+            root = FXMLLoader.load(getClass().getResource("FXMLTelaFavorito.fxml"));
+            bpPrincipal.setCenter(root);
+        }
+        catch(IOException exc) {System.out.println(exc);}
     }
 
     @FXML
