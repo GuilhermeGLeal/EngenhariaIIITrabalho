@@ -21,7 +21,7 @@ public class DALTipo {
         Conexao con = Conexao.getConexao();
         resultado = con.manipular(sql);
         
-        resultado = gravarFavorito((List<Cliente>)(Cliente)(tip.getLo()),'I', tip.getTip_id());
+        resultado = gravarFavorito(tip.getLo(),'I', tip.getTip_id());
         con.desconectar();
         
         return resultado;
@@ -41,7 +41,7 @@ public class DALTipo {
         return resultado;
     }
     
-    public boolean gravarFavorito(List<Cliente> todos, char op, int id){
+    public boolean gravarFavorito(List<Observador> todos, char op, int id){
         
          boolean ok = true;
 
@@ -51,15 +51,17 @@ public class DALTipo {
             
             con.getConnect().setAutoCommit(false);
            
-
-            if(op == 'A')
-                ok = con.manipular("delete * from favorito where = "+id);
             
-            if (ok) {
+            if(op == 'A')
+                ok = con.manipular("delete from favorito where fav_tip= "+id);
+            
+            if (ok || con.getMensagemErro().isEmpty()) {
 
+                ok = true;
                 for (int i = 0; i < todos.size() && ok; i++) {
 
-                    ok = inserirFavorito(id, todos.get(i).getCli_id());
+                    Cliente cli = (Cliente) todos.get(i);
+                    ok = inserirFavorito(id, cli.getCli_id() );
                 }
             }
 
@@ -85,7 +87,7 @@ public class DALTipo {
         
         Conexao con = Conexao.getConexao();
         resultado = con.manipular(sql);
-        resultado = gravarFavorito((List<Cliente>)(Cliente)(tip.getLo()),'A', tip.getTip_id());
+        resultado = gravarFavorito(tip.getLo(),'A', tip.getTip_id());
         
         con.desconectar();
         
@@ -98,7 +100,7 @@ public class DALTipo {
         Conexao con = Conexao.getConexao();
         con.manipular("delete from tipo where tip_id="+id);
         
-        res = con.manipular("delete * from favorito where tip_id"+id);
+        res = con.manipular("delete * from favorito where fav_tip"+id);
         con.desconectar();
         return res;
         
@@ -109,17 +111,21 @@ public class DALTipo {
         
         List<Observador> todos = new ArrayList();
         Conexao con = Conexao.getConexao();
-        ResultSet rs = con.consultar("select * from favorito where tip_id="+idTipo);
+        ResultSet rs = con.consultar("select * from favorito where fav_tip="+idTipo);
         DALCliente dalc = new DALCliente();
         Cliente cli;
         
          try 
         {
-            while(rs.next())
-            {
-                cli = dalc.get(rs.getInt("cli_id"));
-                todos.add(cli);
+            if(rs != null){
+                
+                 while(rs.next())
+                {
+                    cli = dalc.get(rs.getInt("fav_cli"));
+                    todos.add(cli);
+                }
             }
+           
         } 
         catch (SQLException ex) 
         {

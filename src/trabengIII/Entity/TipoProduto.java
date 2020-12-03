@@ -60,7 +60,7 @@ public class TipoProduto implements Sujeito {
     
     @Override
     public String toString() {
-        return "TipoProduto{" + "tip_descricao=" + tip_descricao + '}';
+        return tip_descricao;
     }
 
     @Override

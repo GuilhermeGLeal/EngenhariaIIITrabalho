@@ -3,10 +3,12 @@ package trabengIII.View;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import java.awt.Color;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -60,6 +62,15 @@ public class FXMLTelaFavoritoController implements Initializable {
         controlCli = new ControlCliente();
         
         carregarComboBox();
+        carregarTabela();
+        
+        cbCliente.getSelectionModel().select(0);
+        cbTipoProd.getSelectionModel().select(0);
+        cbtpProduto.getSelectionModel().select(0);
+        
+        CarregaFavoritos(null);
+        
+        // = Color.Red;
     }    
 
     public void carregarComboBox(){
@@ -71,9 +82,9 @@ public class FXMLTelaFavoritoController implements Initializable {
     
     public void carregarTabela(){
         
-       colCli.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTip().getTip_descricao()));
-       colTipo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCli().getCli_nome()));     
-       
+       colCli.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCli().getCli_nome()));
+       colTipo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTip().getTip_descricao()));     
+    
     }
             
             
@@ -89,15 +100,32 @@ public class FXMLTelaFavoritoController implements Initializable {
 
     @FXML
     private void CarregaFavoritos(ActionEvent event) {
+       
+         ObservableList<Favorito> favs;
+      
         
-         tvItensCompra.setItems(FXCollections.observableArrayList(controlTipo.retornarListFav(cbTipoProd.getSelectionModel().getSelectedIndex())));
+        favs = controlTipo.retornarListFav(cbTipoProd.getSelectionModel().getSelectedItem());
+        
+         tvItensCompra.setItems(favs);
     }
 
     @FXML
     private void clkFavoritar(ActionEvent event) {
         
-        controlTipo.adicionarFavorito(cbTipoProd.getSelectionModel().getSelectedIndex(), cbCliente.getSelectionModel().getSelectedItem());
-        CarregaFavoritos(event);
+        boolean res;
+        res = controlTipo.adicionarFavorito(cbTipoProd.getSelectionModel().getSelectedItem(), cbCliente.getSelectionModel().getSelectedItem());
+        
+        if(!res){
+            Alert a = new Alert(Alert.AlertType.ERROR, "Tipo: "+cbTipoProd.getSelectionModel().getSelectedItem().getTip_descricao()+" e Cliente: "+
+                    cbCliente.getSelectionModel().getSelectedItem().getCli_nome()+" já estão favoritados!!"
+                    , ButtonType.OK);
+            
+            a.showAndWait();
+        }
+        else{
+            CarregaFavoritos(event);    
+        }
+        
     }
 
     @FXML
@@ -105,7 +133,7 @@ public class FXMLTelaFavoritoController implements Initializable {
         
         Favorito fav = tvItensCompra.getSelectionModel().getSelectedItem();
         controlTipo.removerFavorito(fav.getTip(), fav.getCli());
-         CarregaFavoritos(event);
+        CarregaFavoritos(event);
     }
 
     @FXML
@@ -113,7 +141,7 @@ public class FXMLTelaFavoritoController implements Initializable {
         
         Alert a;
         
-        String mensagem = controlTipo.notificaTodos(cbtpProduto.getSelectionModel().getSelectedIndex());
+        String mensagem = controlTipo.notificaTodos(cbtpProduto.getSelectionModel().getSelectedItem(), Double.parseDouble(txtDesconto.getText()));
         
         a = new Alert(Alert.AlertType.INFORMATION, mensagem, ButtonType.OK);
         
