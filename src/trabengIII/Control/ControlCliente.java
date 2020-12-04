@@ -40,6 +40,7 @@ public class ControlCliente {
     }
 
     public List<Cliente> getClienteTodos() {
+        listarCliente();
         return clienteTodos;
     }
     

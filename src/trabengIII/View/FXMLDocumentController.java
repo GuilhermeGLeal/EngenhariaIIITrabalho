@@ -110,10 +110,10 @@ public class FXMLDocumentController implements Initializable
         cbTipoPagamento.setItems(FXCollections.observableArrayList(tp));
         
         cbMarca.setItems(FXCollections.observableArrayList(ctrlMar.getMarcaTodos()));
-        cbTipo.setItems(FXCollections.observableArrayList(new DALTipo().get("")));
-        cbMedida.setItems(FXCollections.observableArrayList(new DALMedida().get("")));
-        cbRecipiente.setItems(FXCollections.observableArrayList(new DALRecepiente().get("")));
-        cbCliente.setItems(FXCollections.observableArrayList(new DALCliente().get("")));
+        cbTipo.setItems(FXCollections.observableArrayList(ctrlTip.getTipoTodos()));
+        cbMedida.setItems(FXCollections.observableArrayList(ctrlMed.getUnidadeTodos()));
+        cbRecipiente.setItems(FXCollections.observableArrayList(ctrlRec.getRecipienteTodos()));
+        cbCliente.setItems(FXCollections.observableArrayList(ctrlCli.getClienteTodos()));
         
         cbMarca.getSelectionModel().select(0);
         cbTipo.getSelectionModel().select(0);
