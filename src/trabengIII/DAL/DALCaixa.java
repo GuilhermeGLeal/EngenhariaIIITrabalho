@@ -13,9 +13,8 @@ public class DALCaixa {
     {
         boolean res = false;
         
-        String sql = "insert into caixa(cai_id,cai_abertura,cai_fechamento,"
-                + "cai_inicial,cai_final) values (#1,'#2','#3',#4,#5)";
-        sql = sql.replaceAll("#1", ""+c.getId());
+        String sql = "insert into caixa(cai_abertura,cai_fechamento,"
+                + "cai_inicial,cai_final) values ('#2',#3,#4,#5)";
         sql = sql.replaceAll("#2", ""+c.getAbertura());
         sql = sql.replaceAll("#3", ""+c.getFechamento());
         sql = sql.replaceAll("#4", ""+c.getInicial());
@@ -31,7 +30,7 @@ public class DALCaixa {
     {
         boolean res = false;
         
-        String sql = "update caixa set cai_abertura='#1',cai_fechamento='#2',cai_inicial=#3,cai_final=#4 where cai_id="+c.getId();
+        String sql = "update caixa set cai_abertura='#1',cai_fechamento=#2,cai_inicial=#3,cai_final=#4 where cai_id="+c.getId();
         
         sql = sql.replaceAll("#1", ""+c.getAbertura());
         sql = sql.replaceAll("#2", ""+c.getFechamento());

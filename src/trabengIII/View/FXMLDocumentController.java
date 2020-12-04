@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -24,6 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import trabengIII.Control.ControlCliente;
+import trabengIII.Control.ControlContaReceber;
 import trabengIII.Control.ControlMarcaProduto;
 import trabengIII.Control.ControlMedidaProduto;
 import trabengIII.Control.ControlOperacao;
@@ -97,6 +99,7 @@ public class FXMLDocumentController implements Initializable
     ControlTipoProduto ctrlTip;
     ControlCliente ctrlCli;
     ControlOperacao ctrlOpe;
+    ControlContaReceber ctrlRece;
     
     private void inicializarCBs() {
         
@@ -138,7 +141,8 @@ public class FXMLDocumentController implements Initializable
         ctrlRec = new ControlRecipienteProduto();
         ctrlTip = new ControlTipoProduto();
         ctrlOpe = new ControlOperacao();
-        
+        ctrlRece = new ControlContaReceber();
+        ctrlRece.abrirCaixa(0, LocalDate.now());
         inicializarCBs();
         iniciarTable();
     }    
@@ -190,7 +194,8 @@ public class FXMLDocumentController implements Initializable
         Produto pro = tvLeite.getSelectionModel().getSelectedItem();
         ctrlOpe.adicionarItemVenda(qtd, pro);
         
-        tvItensCompra.setItems(FXCollections.observableArrayList(ctrlOpe.retornarItensVenda()));
+        //tvItensCompra.setItems(FXCollections.observableArrayList(ctrlOpe.retornarItensVenda()));
+        
     }
 
     @FXML
@@ -203,7 +208,26 @@ public class FXMLDocumentController implements Initializable
     }
 
     @FXML
-    private void clkComprar(ActionEvent event) {
+    private void clkComprar(ActionEvent event) 
+    {
+        if(cbTipoPagamento.getSelectionModel().getSelectedItem()!=null)
+        {
+            int quant;
+            double valortot;
+            quant=ctrlOpe.retornaQtdTotal();
+            valortot=ctrlOpe.retornaValorTotal();
+            char auxtipo;
+            
+            if(quant>100)
+                auxtipo='A';
+            else
+                auxtipo='V';
+            ctrlOpe.gravar(cbCliente.getSelectionModel().getSelectedItem(),valortot,LocalDate.now(),auxtipo);
+            ctrlOpe.gravarTrue();
+            
+            ctrlRece.gravar(ctrlOpe.getOp(),'R', LocalDate.now(), LocalDate.now(), valortot,cbTipo.getSelectionModel().getSelectedItem().getTip_descricao().toUpperCase().charAt(0));
+            
+        }
     }
 
     

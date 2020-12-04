@@ -16,8 +16,7 @@ public class DALVenda {
     {
         boolean res = false;
         
-        String sql = "insert into venda(ven_id,ven_cli,ven_valor,ven_data,ven_tipo) values (#1,#2,#3,'#4',#5)";
-        sql = sql.replaceAll("#1", ""+o.getVen_id());
+        String sql = "insert into venda(ven_cli,ven_valor,ven_data,ven_tipo) values (#2,#3,'#4','#5')";
         sql = sql.replaceAll("#2", ""+o.getVen_cli().getCli_id());
         sql = sql.replaceAll("#3", ""+o.getVen_total());
         sql = sql.replaceAll("#4", ""+o.getVen_data());
@@ -38,11 +37,12 @@ public class DALVenda {
         boolean res = false;
         
         String sql = "insert into itens(ite_ven, ite_pro, ite_quantidade) values (#1,#2,#3)";
-        sql = sql.replaceAll("#1", ""+i.getVend().getVen_id());
+        
         sql = sql.replaceAll("#2", ""+i.getProd().getPro_id());
         sql = sql.replaceAll("#3", ""+i.getQtd());
         
         Conexao con = Conexao.getConexao();
+        sql = sql.replaceAll("#1", ""+con.getMaxPK("venda","ven_id"));
         res = con.manipular(sql);
             
         

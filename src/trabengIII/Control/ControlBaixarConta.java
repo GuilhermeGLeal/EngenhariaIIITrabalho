@@ -74,15 +74,15 @@ public abstract class ControlBaixarConta {
         
         boolean result = false;
         
-        if(tipopag == 'P' && caixa.getVfinal() >= op.getVen_total()){
+        if(tipo == 'P' && caixa.getVfinal() >= op.getVen_total()){
             receberpagar = new PagamentoRecebimento(0, op, tipo, emissoa, dataPag, valorPag, tipopag);
             
         }
-        else if(tipopag == 'R')           
+        else if(tipo == 'R')           
             receberpagar = new PagamentoRecebimento(0, op, tipo, emissoa, dataPag, valorPag, tipopag);
         else
             return false;
-             
+        receberpagar.calculadesconto();
         DALReceberPagar dal = new DALReceberPagar();
         result = dal.gravar(receberpagar);
         
@@ -92,7 +92,7 @@ public abstract class ControlBaixarConta {
     
     protected abstract void atualizarCaixa();
     
-    protected void abrirCaixa(double inicial, LocalDate abertura){
+    public final void abrirCaixa(double inicial, LocalDate abertura){
         
         if(this.caixa == null){
             

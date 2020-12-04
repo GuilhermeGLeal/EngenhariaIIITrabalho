@@ -9,10 +9,12 @@ public class DALMovimentoCaixa {
     
     public boolean gravar(MovimentoCaixa m) {
         boolean res = false;
-        String sql = "insert into movimento(mov_con, mov_cai) values ('#1','#2')";
-        sql = sql.replaceAll("#1", ""+m.getMovimento_caixa());
-        sql = sql.replaceAll("#2", ""+m.getMovimento_conta());
+        String sql = "insert into movimento(mov_con, mov_cai) values (#1,#2)";
+        
+        
         Conexao con = Conexao.getConexao();
+        sql = sql.replaceAll("#2", ""+con.getMaxPK("caixa","cai_id"));
+        sql = sql.replaceAll("#1", ""+con.getMaxPK("conta","con_id"));
         res = con.manipular(sql);
         con.desconectar();
         return res;

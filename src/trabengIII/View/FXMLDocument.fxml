@@ -26,7 +26,7 @@
                               <Insets />
                            </HBox.margin>
                         </Button>
-                        <Label text="AtivOperante" textFill="#f8d417">
+                        <Label prefHeight="17.0" prefWidth="190.0" text="Mimosa Enterprise" textFill="#f8d417">
                            <HBox.margin>
                               <Insets right="590.0" />
                            </HBox.margin>

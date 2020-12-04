@@ -10,17 +10,17 @@ public class DALReceberPagar {
     {
         boolean res = false;
         
-        String sql = "insert into conta(con_id,con_tipo,con_emissao,con_pagamento,con_valor,con_tpagamento,con_venda) "
-                        + "values (#1,#2,'#3','#4',#5,#6,#7)";
-        sql = sql.replaceAll("#1", ""+c.getId());
+        String sql = "insert into conta(con_tipo,con_emissao,con_pagamento,con_valor,con_tpagamento,con_ven) "
+                        + "values ('#2','#3','#4',#5,'#6',#7)";
         sql = sql.replaceAll("#2", ""+c.getTipo());
         sql = sql.replaceAll("#3", ""+c.getEmissao());
         sql = sql.replaceAll("#4", ""+c.getPagamento());
         sql = sql.replaceAll("#5", ""+c.getRecebimento());
         sql = sql.replaceAll("#6", ""+c.getTipo_pagamento());
-        sql = sql.replaceAll("#7", ""+c.getVenda().getVen_id());
+        
         
         Conexao con = Conexao.getConexao();
+        sql = sql.replaceAll("#7", ""+con.getMaxPK("venda","ven_id"));
         res = con.manipular(sql);
         con.desconectar();
         return res;        
