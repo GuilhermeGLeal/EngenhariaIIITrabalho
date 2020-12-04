@@ -28,6 +28,7 @@ public class ControlMedidaProduto {
     }
 
     public List<UnidadeMedida> getUnidadeTodos() {
+        listarUnidades();
         return unidadeTodos;
     }
 

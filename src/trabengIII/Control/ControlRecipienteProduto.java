@@ -29,6 +29,7 @@ public class ControlRecipienteProduto {
     }
 
     public List<RecipienteProduto> getRecipienteTodos() {
+        listarUnidades();
         return recipienteTodos;
     }
     
