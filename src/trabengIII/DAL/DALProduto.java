@@ -99,7 +99,7 @@ public class DALProduto {
         List <Produto> aux = new ArrayList();
         Conexao con = Conexao.getConexao();
         ResultSet rs = con.consultar(sql);
-        con.desconectar();;
+        con.desconectar();
         try 
         {
             DALTipo dalT = new DALTipo();

@@ -1,6 +1,7 @@
 package trabengIII.Control;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import trabengIII.DAL.DALVenda;
 import trabengIII.Entity.Atacado;
@@ -13,20 +14,21 @@ import trabengIII.Entity.Varejo;
 public class ControlOperacao {
     
     private Operacao op;
+    private List<ItensVenda> itensV;
 
     public ControlOperacao() {
-        
+        itensV = new ArrayList();
     }
     
     public List<ItensVenda> retornarItensVenda(){
         
-        return op.getItens();
+        return itensV;
     }
     
     public void adicionarItemVenda(int qtd, Produto prod){
         
         ItensVenda novo = new ItensVenda(prod, qtd, this.op);
-        this.op.setItens(novo);
+        this.itensV.add(novo);
     }
         
     public boolean gravar(Cliente cli, double venda, LocalDate vendata, char tipo){

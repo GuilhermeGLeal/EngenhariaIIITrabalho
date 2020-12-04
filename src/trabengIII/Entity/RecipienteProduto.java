@@ -30,6 +30,6 @@ public class RecipienteProduto {
 
     @Override
     public String toString() {
-        return "RecipienteProduto{" + "rec_descricao=" + rec_descricao + '}';
+        return rec_descricao;
     }
 }

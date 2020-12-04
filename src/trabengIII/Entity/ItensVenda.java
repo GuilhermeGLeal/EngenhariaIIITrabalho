@@ -6,7 +6,6 @@ public class ItensVenda {
     private Produto prod;
     private int qtd;
     private Operacao vend;
-    private static ItensVenda iten = null;
        
     public ItensVenda(Produto prod, int qtd, Operacao vend){
         
@@ -18,15 +17,6 @@ public class ItensVenda {
     public ItensVenda(Produto prod, int qtd) {
         this.prod = prod;
         this.qtd = qtd;
-    }
-    
-    public static ItensVenda criarItem(Produto prod, int qtd, Operacao vend){
-     
-        
-        
-        
-        
-        return null;
     }
 
     public Produto getProd() {
@@ -52,6 +42,4 @@ public class ItensVenda {
     public void setVend(Operacao vend) {
         this.vend = vend;
     }
-    
-    
 }

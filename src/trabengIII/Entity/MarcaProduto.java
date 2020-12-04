@@ -30,6 +30,6 @@ public class MarcaProduto {
 
     @Override
     public String toString() {
-        return "MarcaProduto{" + "mar_descricao=" + mar_descricao + '}';
+        return mar_descricao;
     }
 }
